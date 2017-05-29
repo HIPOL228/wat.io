@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+</head>
+<body>
+<script type="text/javascript"src="point.js"></script>
+<script type="text/javascript">
+var js = new PointJS('2D',1280,720,{backgroundColor:'#757575'});
+var game = js.game;
+
+var m = js.mouseControl; 
+m.initMouseControl(); 
+var r =js.math.random;
+var log = js.system.log;
+var e = m.getPosition
+var color =['red','black','blue','#2100ED','#FFF568','#30FF32'];
+
+var index = r(0,color.length-1);
+log(index);
+log(color);
+
+var k = game.newRectObject({ 
+x: 100, y: 100, w: 50, h: 50, fillColor : color[index]
+});
+
+log(k.fillColor);
+
+game.newLoop('slizario',function () {
+k.rotate(m.getPosition())
+game.clear();
+if (k.getDistance(e())>20)
+k.moveAngle(2.5);
+//if(js.mouseControl.isDown('LEFT'));
+//k.moveAngle(20); не рабочие ускорение 
+k.draw();	
+})
+game.setLoop('slizario'); 
+game.start();  
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
